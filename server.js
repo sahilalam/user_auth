@@ -81,8 +81,10 @@ app.post('/register',async(req,res)=>{
     }
     catch(err)
     {
-        console.log(err.message);
-        res.status(400).json(err);
+        console.log(err);
+        res.status(400).json({
+            message:err.message
+        });
     } 
 });
 
@@ -116,7 +118,9 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
     catch(err)
     {
         console.log(err);
-        res.status(404).json(err);
+        res.status(404).json({
+            message:err.message
+        });
     }
 })
 app.post('/login',async(req,res)=>{
@@ -151,7 +155,9 @@ app.post('/login',async(req,res)=>{
     catch(err)
     {
         console.log(err);
-        res.status(400).json(err);
+        res.status(400).json({
+            message:err.message
+        });
     }
 }) 
 
