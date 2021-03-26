@@ -105,7 +105,7 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
         }
         else
         {
-            res.status(400).json(new error("Either Username or password is empty!"));
+            res.status(400).json(new Error("Either Username or password is empty!"));
         }
             
         
