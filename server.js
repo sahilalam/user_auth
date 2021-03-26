@@ -94,12 +94,21 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
         const email=base64.decode(encrypted_mail);
         const username=req.body.username;
         const password=req.body.password;
-        const hash= await hashPass(password);
-        const data=await addUser(username,hash,email);
-        res.status(201).json({
-            message:"User Created!",
-            info:data
-        });
+        if(username.length && password.length)
+        {
+            const hash= await hashPass(password);
+            const data=await addUser(username,hash,email);
+            res.status(201).json({
+                message:"User Created!",
+                info:data
+            });
+        }
+        else
+        {
+            res.status(400).json(throw new error("Either Username or password is empty!"));
+        }
+            
+        
 
     }
     catch(err)
