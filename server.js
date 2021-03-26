@@ -55,7 +55,7 @@ app.post('/register',async(req,res)=>{
         {
             console.log("exists")
             res.json({
-                error:"User Already Exists!"
+                message:"User Already Exists!"
             })
         }
         else
