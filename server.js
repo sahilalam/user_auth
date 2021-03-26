@@ -82,9 +82,7 @@ app.post('/register',async(req,res)=>{
     catch(err)
     {
         console.log(err);
-        res.status(400).json({
-            error:err.message
-        });
+        res.status(400).json(err);
     } 
 });
 
@@ -98,17 +96,16 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
         const password=req.body.password;
         const hash= await hashPass(password);
         const data=await addUser(username,hash,email);
-        res.status(201).json(data);
+        res.status(201).json({
+            message:"User Created!",
+            info:data
+        });
 
     }
     catch(err)
     {
         console.log(err);
-        res.status(404).json(
-            {
-                error:err.message
-            }
-        );
+        res.status(404).json(err);
     }
 })
 app.post('/login',async(req,res)=>{
@@ -143,11 +140,7 @@ app.post('/login',async(req,res)=>{
     catch(err)
     {
         console.log(err);
-        res.status(400).json(
-            {
-                error:err.message
-            }
-        );
+        res.status(400).json(err);
     }
 }) 
 
