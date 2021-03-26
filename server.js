@@ -73,7 +73,7 @@ app.post('/register',async(req,res)=>{
            });
 
            res.status(200).json({
-               message:"Mail Sent !!!",
+               message:"Mail Sent !!! Please Check your mail",
                info
            })
 
