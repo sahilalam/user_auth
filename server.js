@@ -61,7 +61,7 @@ app.post('/register',async(req,res)=>{
         else
         {
            const encrypted_mail=base64.encode(email);
-           const href=`${process.env.FRONT_URL}/login/${encrypted_mail}`;
+           const href=`${process.env.FRONT_URL}/register/${encrypted_mail}`;
            let html=`<a href=${href}>Click Here</a> to verify your E-Mail`;
            
            let info =await transporter.sendMail({
