@@ -98,8 +98,6 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
         const password=req.body.password;
         if(username.length && password.length)
         {
-            const hash= await hashPass(password);
-            const data=await addUser(username,hash,email);
             const check_username=await checkUsername(username);
             if(check_username)
             {
@@ -111,11 +109,16 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
             }
             else
             {
+                const hash= await hashPass(password);
+                const data=await addUser(username,hash,email);
                 res.status(201).json({
-                    message:"User Created!",
+                    message:"User Created! Please login to continue..",
                     info:data
                 });
             }
+            
+            
+            
         }
         else
         {
