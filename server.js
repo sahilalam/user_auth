@@ -44,7 +44,7 @@ app.use(express.urlencoded({extended:true}))
 
 
 
-const {checkEmail,addUser,login} =require('./db.js');
+const {checkEmail,addUser,login,checkUsername} =require('./db.js');
 
 
 app.post('/register',async(req,res)=>{
@@ -100,10 +100,22 @@ app.post('/register/:encrypted_mail',async(req,res)=>{
         {
             const hash= await hashPass(password);
             const data=await addUser(username,hash,email);
-            res.status(201).json({
-                message:"User Created!",
-                info:data
-            });
+            const check_username=await checkUsername(username);
+            if(check_username)
+            {
+                res.json(
+                    {
+                        message:"Username already taken! Try again with different username.."
+                    }
+                )
+            }
+            else
+            {
+                res.status(201).json({
+                    message:"User Created!",
+                    info:data
+                });
+            }
         }
         else
         {
